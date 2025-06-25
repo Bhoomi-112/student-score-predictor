@@ -47,8 +47,60 @@ model.fit(X_train, y_train)
 
 ---
 
+## 📈 5. Visualize Regression Line
+
+This plot shows how well the model fits the data:
+
+- 🔵 **Blue dots** = Actual data points  
+- 🔴 **Red line** = Model's predicted regression line
+
+![Regression Line](./plot.png)
+
+---
+
+## 🎯 6. Predict on New Data
+
+Use your trained model to predict the score for a student who studied **6.5 hours**:
+
+```python
+model.predict([[6.5]])
 ## 🔮 Sample Prediction
 
 ```python
 # Input: 6.5 hours studied
 predicted_score = model.predict([[6.5]])
+```
+---
+
+## 📚 Prediction Result
+
+🧠 **Predicted Score for 6.5 Hours of Study**:  ~72.98 marks
+
+
+---
+
+## 📐 Model Evaluation
+
+| Metric                  | Value   | Meaning                                        |
+|-------------------------|---------|------------------------------------------------|
+| 📉 Mean Absolute Error  | 3.29    | Average error between actual & predicted       |
+| 🔢 Mean Squared Error   | 13.49   | Penalizes larger errors more                   |
+| 📊 R² Score (Accuracy)  | 0.96 ✅ | Model explains **96%** of the variance in data |
+
+> ✅ **Excellent fit!** Only ~4% variance remains unexplained.
+
+---
+
+## 📎 Files Included
+
+| File Name                        | Description                                |
+|----------------------------------|--------------------------------------------|
+| `student_scores.csv`             | Dataset used in this project               |
+| `student-score-predictor.ipynb`  | Full Kaggle notebook with all the code     |
+| `plot.png`                       | Graph showing regression line + data       |
+| `README.md`                      | You’re reading it now! 📖                  |
+
+---
+
+
+
