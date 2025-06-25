@@ -42,19 +42,13 @@ This beginner-friendly machine learning project uses **Simple Linear Regression*
 - 80% training, 20% testing using `train_test_split()`
 
 ### 4. 🧠 Train the Model
-```python
-model.fit(X_train, y_train)
+
 
 ---
 
 ## 📈 5. Visualize Regression Line
 
-This plot shows how well the model fits the data:
 
-- 🔵 **Blue dots** = Actual data points  
-- 🔴 **Red line** = Model's predicted regression line
-
-![Regression Line](./plot.png)
 
 ---
 
