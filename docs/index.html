@@ -1,183 +1,148 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Student Score Predictor</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <title>Score Predictor</title>
   <style>
-    :root {
-      --bg-light: #f9fafb;
-      --text-light: #1e293b;
-      --bg-dark: #0f172a;
-      --text-dark: #e2e8f0;
-      --accent: #38bdf8;
-      --highlight: #10b981;
-      --input-bg-dark: #1e293b;
-      --input-bg-light: #e2e8f0;
-    }
-
     body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      background: var(--bg-dark);
-      color: var(--text-dark);
-      scroll-behavior: smooth;
-      transition: background 0.5s ease, color 0.5s ease;
-    }
-
-    body.light {
-      background: var(--bg-light);
-      color: var(--text-light);
-    }
-
-    header {
-      text-align: center;
-      padding: 3rem 1rem 1rem;
+      background: linear-gradient(135deg, #fbeaff, #dff0ff);
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+      color: #333;
     }
 
     h1 {
-      color: var(--accent);
       font-size: 2.5rem;
-      margin-bottom: 0.5rem;
+      margin-bottom: 1rem;
+      color: #5f27cd;
     }
 
-    p {
-      font-size: 1.1rem;
-      color: inherit;
-    }
-
-    section {
-      padding: 2rem 1rem;
-      max-width: 600px;
-      margin: auto;
-      display: flex;
-      flex-direction: column;
+    .form {
+      background: white;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 15px 25px rgba(0,0,0,0.1);
+      display: grid;
       gap: 1rem;
-    }
-
-    input {
       width: 100%;
-      padding: 0.8rem;
-      border: none;
-      border-radius: 8px;
+      max-width: 500px;
+    }
+
+    label {
+      font-weight: bold;
+      color: #555;
+    }
+
+    input[type=number] {
+      width: 100%;
+      padding: 0.6rem;
+      border: 2px solid #ddd;
+      border-radius: 10px;
       font-size: 1rem;
-      background: var(--input-bg-dark);
-      color: var(--text-dark);
-      transition: background 0.3s ease;
+      transition: 0.3s;
     }
 
-    body.light input {
-      background: var(--input-bg-light);
-      color: var(--text-light);
+    input[type=number]:focus {
+      border-color: #5f27cd;
+      outline: none;
     }
 
-    button {
-      background: var(--accent);
-      color: #000;
-      border: none;
-      padding: 0.7rem 1.2rem;
-      font-size: 1rem;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: transform 0.2s ease, background 0.3s ease;
-    }
-
-    button:hover {
-      background: var(--highlight);
-      transform: scale(1.05);
-    }
-
-    .output {
+    .score-output {
+      text-align: center;
       margin-top: 2rem;
-      font-size: 1.3rem;
-      text-align: center;
-      opacity: 0;
-      transition: opacity 1s ease;
     }
 
-    .output.show {
-      opacity: 1;
+    .score-number {
+      font-size: 3rem;
+      color: #00b894;
+      transition: all 0.5s ease-in-out;
     }
 
-    .toggle-container {
-      text-align: center;
+    .progress-bar {
+      width: 100%;
+      height: 20px;
+      background: #eee;
+      border-radius: 10px;
+      overflow: hidden;
       margin-top: 1rem;
     }
 
-    .toggle-btn {
-      background: none;
-      border: 2px solid var(--accent);
-      color: var(--accent);
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    footer {
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.9rem;
-      color: #94a3b8;
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(to right, #00b894, #6c5ce7);
+      width: 0%;
+      transition: width 0.5s ease;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>🎯 Student Score Predictor</h1>
-    <p>Predict your marks based on daily habits 📚</p>
-    <div class="toggle-container">
-      <button class="toggle-btn" onclick="toggleTheme()">🌓 Toggle Theme</button>
+
+  <h1>🎯 Real-Time Score Predictor</h1>
+  <div class="form" id="inputForm">
+    <label>📚 Study Hours:</label>
+    <input type="number" id="hours" min="0" step="0.1" />
+
+    <label>😴 Sleep Hours:</label>
+    <input type="number" id="sleep" min="0" step="0.1" />
+
+    <label>☕ Breaks Taken:</label>
+    <input type="number" id="breaks" min="0" step="0.1" />
+
+    <label>📱 Internet Time:</label>
+    <input type="number" id="internet" min="0" step="0.1" />
+
+    <label>📖 Revision Time:</label>
+    <input type="number" id="revision" min="0" step="0.1" />
+
+    <label>🏫 Attendance (%):</label>
+    <input type="number" id="attendance" min="0" max="100" step="1" />
+  </div>
+
+  <div class="score-output">
+    <div class="score-number" id="score">Score: 0</div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressBar"></div>
     </div>
-  </header>
-
-  <section>
-    <input id="hours" type="number" placeholder="Hours studied" step="0.1" />
-    <input id="sleep" type="number" placeholder="Hours of sleep" step="0.1" />
-    <input id="breaks" type="number" placeholder="Number of breaks" />
-    <input id="internet" type="number" placeholder="Hours spent on internet" step="0.1" />
-    <input id="revision" type="number" placeholder="Number of revisions" />
-    <input id="attendance" type="number" placeholder="Attendance (%)" />
-    <button onclick="predictScore()">Predict Score</button>
-    <div class="output" id="result"></div>
-  </section>
-
-  <footer>
-    Made with 💙 by Bhoomi | Powered by Linear Regression
-  </footer>
+  </div>
 
   <script>
-    function toggleTheme() {
-      document.body.classList.toggle("light");
+    const inputs = document.querySelectorAll('input');
+    const scoreEl = document.getElementById('score');
+    const progressBar = document.getElementById('progressBar');
+
+    function calculateScore() {
+      const h = parseFloat(document.getElementById('hours').value) || 0;
+      const s = parseFloat(document.getElementById('sleep').value) || 0;
+      const b = parseFloat(document.getElementById('breaks').value) || 0;
+      const i = parseFloat(document.getElementById('internet').value) || 0;
+      const r = parseFloat(document.getElementById('revision').value) || 0;
+      const a = parseFloat(document.getElementById('attendance').value) || 0;
+
+      const score =
+        8.3326 * h +
+        2.5458 * s -
+        2.4099 * b -
+        1.7220 * i +
+        4.6646 * r +
+        0.3465 * a -
+        10.493;
+
+      const finalScore = Math.max(0, Math.round(score));
+      scoreEl.textContent = `Score: ${finalScore}`;
+
+      // Animate progress bar to max 100
+      const percent = Math.min(100, finalScore);
+      progressBar.style.width = percent + '%';
     }
 
-    function predictScore() {
-      const hours = parseFloat(document.getElementById("hours").value) || 0;
-      const sleep = parseFloat(document.getElementById("sleep").value) || 0;
-      const breaks = parseFloat(document.getElementById("breaks").value) || 0;
-      const internet = parseFloat(document.getElementById("internet").value) || 0;
-      const revision = parseFloat(document.getElementById("revision").value) || 0;
-      const attendance = parseFloat(document.getElementById("attendance").value) || 0;
-
-      const score = 
-          8.3326 * hours +
-          2.5458 * sleep +
-         -2.4099 * breaks +
-         -1.7220 * internet +
-          4.6646 * revision +
-          0.3465 * attendance +
-         -10.4935;
-
-      const result = document.getElementById("result");
-      result.classList.remove("show");
-      result.innerText = "🔄 Calculating...";
-
-      setTimeout(() => {
-        result.innerText = `🎓 Predicted Score: ${score.toFixed(2)} marks`;
-        result.classList.add("show");
-      }, 700);
-    }
+    inputs.forEach(input => {
+      input.addEventListener('input', calculateScore);
+    });
   </script>
+
 </body>
 </html>
