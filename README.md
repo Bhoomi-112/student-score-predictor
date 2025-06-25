@@ -48,8 +48,12 @@ This beginner-friendly machine learning project uses **Simple Linear Regression*
 
 ## 📈 5. Visualize Regression Line
 
+This plot shows how well the model fits the data:
 
+- 🔵 **Blue dots** = Actual data points  
+- 🔴 **Red line** = Model's predicted regression line
 
+![Regression Line](./plot.png)
 ---
 
 ## 🎯 6. Predict on New Data
