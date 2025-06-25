@@ -141,24 +141,37 @@
 
 </head>
    <script>
+  // Load theme preference from localStorage on page load
+  window.onload = () => {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "light") {
+      document.body.classList.add("light");
+      document.querySelector(".toggle-btn").innerHTML = "🌞 Toggle Theme";
+    }
+  };
+
+  // Toggle and save theme
   function toggleTheme() {
     const body = document.body;
     body.classList.toggle("light");
 
-    const btn = document.querySelector(".toggle-btn");
     const isLight = body.classList.contains("light");
+    const btn = document.querySelector(".toggle-btn");
     btn.innerHTML = isLight ? "🌞 Toggle Theme" : "🌙 Toggle Theme";
+
+    localStorage.setItem("theme", isLight ? "light" : "dark");
   }
 </script>
+
 <body>
 
 <header>
   <h1>📚 Student Score Predictor</h1>
   <p>Enter hours studied to predict your exam score 🎯</p>
 
-  <div class="theme-toggle">
+  <span class="theme-toggle">
   <button class="toggle-btn" onclick="toggleTheme()">🌙 Toggle Theme</button>
-</div>
+</span>
 
 </header>
 
