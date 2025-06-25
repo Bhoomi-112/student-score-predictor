@@ -46,6 +46,7 @@
     color: var(--accent);
     font-size: 2.5rem;
     margin-bottom: 0.5rem;
+    transition: color 0.3s ease;
   }
 
   section {
@@ -75,7 +76,7 @@
     font-size: 1rem;
     border-radius: 6px;
     cursor: pointer;
-    transition: background 0.3s ease, color 0.3s ease;
+    transition: all 0.3s ease;
   }
 
   .output {
@@ -96,7 +97,9 @@
   }
 
   @keyframes spin {
-    to { transform: rotate(360deg); }
+    to {
+      transform: rotate(360deg);
+    }
   }
 
   footer {
@@ -109,17 +112,19 @@
   a {
     color: var(--highlight);
     text-decoration: none;
+    transition: color 0.3s ease;
   }
 
   a:hover {
     text-decoration: underline;
   }
 
-  /* Toggle Button */
+  /* Theme Toggle */
   .theme-toggle {
     position: absolute;
     top: 1rem;
     right: 1.5rem;
+    z-index: 999;
   }
 
   .toggle-btn {
@@ -137,11 +142,40 @@
     background: var(--accent);
     color: #000;
   }
+
+  /* ✅ Responsive layout */
+  @media (max-width: 600px) {
+    h1 {
+      font-size: 2rem;
+    }
+
+    .toggle-btn {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.9rem;
+    }
+
+    input, button {
+      font-size: 1rem;
+    }
+
+    .output {
+      font-size: 1.1rem;
+    }
+
+    section {
+      padding: 1.5rem 1rem;
+    }
+
+    header {
+      padding: 2rem 1rem 0.5rem;
+    }
+  }
 </style>
+
 
 </head>
    <script>
-  // Load theme preference from localStorage on page load
+  // Load theme from localStorage
   window.onload = () => {
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme === "light") {
@@ -150,7 +184,7 @@
     }
   };
 
-  // Toggle and save theme
+  // Toggle theme and save it
   function toggleTheme() {
     const body = document.body;
     body.classList.toggle("light");
@@ -162,6 +196,7 @@
     localStorage.setItem("theme", isLight ? "light" : "dark");
   }
 </script>
+
 
 <body>
 
