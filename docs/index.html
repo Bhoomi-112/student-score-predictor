@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,259 +6,178 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Student Score Predictor</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
- 
-
- <style>
-  :root {
-    --bg: #0f172a;
-    --text: #e2e8f0;
-    --accent: #38bdf8;
-    --highlight: #10b981;
-    --input-bg: #1e293b;
-    --loader-bg: #2d3748;
-    --footer: #94a3b8;
-  }
-
-  body.light {
-    --bg: #f9fafb;
-    --text: #1e293b;
-    --accent: #2563eb;
-    --highlight: #059669;
-    --input-bg: #e2e8f0;
-    --loader-bg: #cbd5e1;
-    --footer: #64748b;
-  }
-
-  body {
-    margin: 0;
-    font-family: 'Inter', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    scroll-behavior: smooth;
-    transition: background 0.4s ease, color 0.4s ease;
-  }
-
-  header {
-    text-align: center;
-    padding: 3rem 1rem 1rem;
-  }
-
-  h1 {
-    color: var(--accent);
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
-    transition: color 0.3s ease;
-  }
-
-  section {
-    padding: 2rem 1rem;
-    max-width: 600px;
-    margin: auto;
-  }
-
-  input {
-    width: 100%;
-    padding: 0.8rem;
-    margin-top: 1rem;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    background: var(--input-bg);
-    color: var(--text);
-    transition: background 0.3s ease, color 0.3s ease;
-  }
-
-  button {
-    margin-top: 1rem;
-    background: var(--accent);
-    color: #000;
-    border: none;
-    padding: 0.7rem 1.2rem;
-    font-size: 1rem;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-
-  .output {
-    margin-top: 2rem;
-    font-size: 1.3rem;
-    text-align: center;
-  }
-
-  .loader {
-    display: none;
-    border: 5px solid var(--loader-bg);
-    border-top: 5px solid var(--accent);
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    margin: 20px auto;
-    animation: spin 1s linear infinite;
-  }
-
-  @keyframes spin {
-    to {
-      transform: rotate(360deg);
-    }
-  }
-
-  footer {
-    text-align: center;
-    padding: 2rem;
-    font-size: 0.9rem;
-    color: var(--footer);
-  }
-
-  a {
-    color: var(--highlight);
-    text-decoration: none;
-    transition: color 0.3s ease;
-  }
-
-  a:hover {
-    text-decoration: underline;
-  }
-
-  /* Theme Toggle */
-  .theme-toggle {
-    position: absolute;
-    top: 1rem;
-    right: 1.5rem;
-    z-index: 999;
-  }
-
-  .toggle-btn {
-    background: none;
-    border: 2px solid var(--accent);
-    color: var(--accent);
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: all 0.3s ease;
-  }
-
-  .toggle-btn:hover {
-    background: var(--accent);
-    color: #000;
-  }
-
-  /* ✅ Responsive layout */
-  @media (max-width: 600px) {
-    h1 {
-      font-size: 2rem;
+  <style>
+    :root {
+      --bg-light: #f9fafb;
+      --text-light: #1e293b;
+      --bg-dark: #0f172a;
+      --text-dark: #e2e8f0;
+      --accent: #38bdf8;
+      --highlight: #10b981;
+      --input-bg-dark: #1e293b;
+      --input-bg-light: #e2e8f0;
     }
 
-    .toggle-btn {
-      padding: 0.4rem 0.8rem;
-      font-size: 0.9rem;
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-dark);
+      scroll-behavior: smooth;
+      transition: background 0.5s ease, color 0.5s ease;
     }
 
-    input, button {
-      font-size: 1rem;
-    }
-
-    .output {
-      font-size: 1.1rem;
-    }
-
-    section {
-      padding: 1.5rem 1rem;
+    body.light {
+      background: var(--bg-light);
+      color: var(--text-light);
     }
 
     header {
-      padding: 2rem 1rem 0.5rem;
+      text-align: center;
+      padding: 3rem 1rem 1rem;
     }
-  }
-</style>
 
+    h1 {
+      color: var(--accent);
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
 
+    p {
+      font-size: 1.1rem;
+      color: inherit;
+    }
+
+    section {
+      padding: 2rem 1rem;
+      max-width: 600px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.8rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      background: var(--input-bg-dark);
+      color: var(--text-dark);
+      transition: background 0.3s ease;
+    }
+
+    body.light input {
+      background: var(--input-bg-light);
+      color: var(--text-light);
+    }
+
+    button {
+      background: var(--accent);
+      color: #000;
+      border: none;
+      padding: 0.7rem 1.2rem;
+      font-size: 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.3s ease;
+    }
+
+    button:hover {
+      background: var(--highlight);
+      transform: scale(1.05);
+    }
+
+    .output {
+      margin-top: 2rem;
+      font-size: 1.3rem;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    .output.show {
+      opacity: 1;
+    }
+
+    .toggle-container {
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    .toggle-btn {
+      background: none;
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      color: #94a3b8;
+    }
+  </style>
 </head>
-   <script>
-  // Load theme from localStorage
-  window.onload = () => {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "light") {
-      document.body.classList.add("light");
-      document.querySelector(".toggle-btn").innerHTML = "🌞 Toggle Theme";
-    }
-  };
-
-  // Toggle theme and save it
-  function toggleTheme() {
-    const body = document.body;
-    body.classList.toggle("light");
-
-    const isLight = body.classList.contains("light");
-    const btn = document.querySelector(".toggle-btn");
-    btn.innerHTML = isLight ? "🌞 Toggle Theme" : "🌙 Toggle Theme";
-
-    localStorage.setItem("theme", isLight ? "light" : "dark");
-  }
-</script>
-
-
 <body>
-  <!-- 🌗 Theme Toggle Button -->
-  <div class="theme-toggle">
-    <button class="toggle-btn" onclick="toggleTheme()">🌙 Toggle Theme</button>
-  </div>
+  <header>
+    <h1>🎯 Student Score Predictor</h1>
+    <p>Predict your marks based on daily habits 📚</p>
+    <div class="toggle-container">
+      <button class="toggle-btn" onclick="toggleTheme()">🌓 Toggle Theme</button>
+    </div>
+  </header>
 
-<header>
-  
-  <h1>📚 Student Score Predictor</h1>
-  <p>Enter hours studied to predict your exam score 🎯</p>
+  <section>
+    <input id="hours" type="number" placeholder="Hours studied" step="0.1" />
+    <input id="sleep" type="number" placeholder="Hours of sleep" step="0.1" />
+    <input id="breaks" type="number" placeholder="Number of breaks" />
+    <input id="internet" type="number" placeholder="Hours spent on internet" step="0.1" />
+    <input id="revision" type="number" placeholder="Number of revisions" />
+    <input id="attendance" type="number" placeholder="Attendance (%)" />
+    <button onclick="predictScore()">Predict Score</button>
+    <div class="output" id="result"></div>
+  </section>
 
-  
+  <footer>
+    Made with 💙 by Bhoomi | Powered by Linear Regression
+  </footer>
 
-</header>
-
-<section>
-  <label for="hours">🕐 Hours Studied:</label>
-  <input type="number" id="hours" placeholder="e.g. 6.5" step="0.1" min="0" />
-
-  <button onclick="predictScore()">Predict</button>
-
-  <div class="loader" id="loader"></div>
-
-  <div class="output" id="output"></div>
-</section>
-
-<section id="model">
-  <h2>📐 Model Summary</h2>
-  <p><strong>Equation:</strong> y = <span style="color: var(--highlight)">9.7758x + 2.4836</span></p>
-  <p>This is the learned linear regression line based on your dataset.</p>
-</section>
-
-<footer>
-  Made with ❤️ by Bhoomi Awhad | <a href="#model">Jump to Model</a>
-</footer>
-
-<script>
-  function predictScore() {
-    const hours = parseFloat(document.getElementById('hours').value);
-    const loader = document.getElementById('loader');
-    const output = document.getElementById('output');
-
-    if (isNaN(hours)) {
-      output.innerHTML = "❌ Please enter a valid number.";
-      return;
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle("light");
     }
 
-    loader.style.display = "block";
-    output.innerHTML = "";
+    function predictScore() {
+      const hours = parseFloat(document.getElementById("hours").value) || 0;
+      const sleep = parseFloat(document.getElementById("sleep").value) || 0;
+      const breaks = parseFloat(document.getElementById("breaks").value) || 0;
+      const internet = parseFloat(document.getElementById("internet").value) || 0;
+      const revision = parseFloat(document.getElementById("revision").value) || 0;
+      const attendance = parseFloat(document.getElementById("attendance").value) || 0;
 
-    setTimeout(() => {
-      const m = 9.7758;
-      const c = 2.4836;
-      const prediction = m * hours + c;
+      const score = 
+          8.3326 * hours +
+          2.5458 * sleep +
+         -2.4099 * breaks +
+         -1.7220 * internet +
+          4.6646 * revision +
+          0.3465 * attendance +
+         -10.4935;
 
-      loader.style.display = "none";
-      output.innerHTML = `🎓 Predicted Score: <strong>${prediction.toFixed(2)} marks</strong>`;
-    }, 1200); // simulate loading
-  }
-</script>
+      const result = document.getElementById("result");
+      result.classList.remove("show");
+      result.innerText = "🔄 Calculating...";
 
+      setTimeout(() => {
+        result.innerText = `🎓 Predicted Score: ${score.toFixed(2)} marks`;
+        result.classList.add("show");
+      }, 700);
+    }
+  </script>
 </body>
 </html>
