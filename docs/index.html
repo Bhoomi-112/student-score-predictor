@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Score Predictor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --text: #e2e8f0;
+      --accent: #38bdf8;
+      --highlight: #10b981;
+    }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      scroll-behavior: smooth;
+    }
+    header {
+      text-align: center;
+      padding: 3rem 1rem 1rem;
+    }
+    h1 {
+      color: var(--accent);
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    section {
+      padding: 2rem 1rem;
+      max-width: 600px;
+      margin: auto;
+    }
+    input {
+      width: 100%;
+      padding: 0.8rem;
+      margin-top: 1rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      background: #1e293b;
+      color: var(--text);
+    }
+    button {
+      margin-top: 1rem;
+      background: var(--accent);
+      color: #000;
+      border: none;
+      padding: 0.7rem 1.2rem;
+      font-size: 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .output {
+      margin-top: 2rem;
+      font-size: 1.3rem;
+      text-align: center;
+    }
+    .loader {
+      display: none;
+      border: 5px solid #2d3748;
+      border-top: 5px solid var(--accent);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      margin: 20px auto;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      color: #94a3b8;
+    }
+    a {
+      color: var(--highlight);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>📚 Student Score Predictor</h1>
+  <p>Enter hours studied to predict your exam score 🎯</p>
+</header>
+
+<section>
+  <label for="hours">🕐 Hours Studied:</label>
+  <input type="number" id="hours" placeholder="e.g. 6.5" step="0.1" min="0" />
+
+  <button onclick="predictScore()">Predict</button>
+
+  <div class="loader" id="loader"></div>
+
+  <div class="output" id="output"></div>
+</section>
+
+<section id="model">
+  <h2>📐 Model Summary</h2>
+  <p><strong>Equation:</strong> y = <span style="color: var(--highlight)">9.7758x + 2.4836</span></p>
+  <p>This is the learned linear regression line based on your dataset.</p>
+</section>
+
+<footer>
+  Made with ❤️ by Bhoomi Awhad | <a href="#model">Jump to Model</a>
+</footer>
+
+<script>
+  function predictScore() {
+    const hours = parseFloat(document.getElementById('hours').value);
+    const loader = document.getElementById('loader');
+    const output = document.getElementById('output');
+
+    if (isNaN(hours)) {
+      output.innerHTML = "❌ Please enter a valid number.";
+      return;
+    }
+
+    loader.style.display = "block";
+    output.innerHTML = "";
+
+    setTimeout(() => {
+      const m = 9.7758;
+      const c = 2.4836;
+      const prediction = m * hours + c;
+
+      loader.style.display = "none";
+      output.innerHTML = `🎓 Predicted Score: <strong>${prediction.toFixed(2)} marks</strong>`;
+    }, 1200); // simulate loading
+  }
+</script>
+
+</body>
+</html>
